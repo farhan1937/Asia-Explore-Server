@@ -36,9 +36,14 @@ async function run() {
     await client.connect();
 
 
+    const addTourists = client.db('touristsDB').collection('tourists')
+
+
     app.post('/tourists', async (req, res) => {
       const newSport = req.body;
       console.log(newSport);
+      const result = await addTourists.insertOne(newSport);
+      res.send(result)
 
     })
 
