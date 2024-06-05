@@ -10,8 +10,6 @@ const port = process.env.PORT || 5001
 app.use(cors());
 app.use(express.json());
 
-//touristsSport
-//lVe3rZSCmEpUjw3o
 
 
 
