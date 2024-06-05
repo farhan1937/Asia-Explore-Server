@@ -44,9 +44,9 @@ async function run() {
       res.send(result)
     })
 
-    app.get('/tourists/:id', async(req, res)=>{
+    app.get('/tourists/:id', async (req, res) => {
       const id = req.params.id;
-      const query = {_id: new ObjectId(id)}
+      const query = { _id: new ObjectId(id) }
       const result = await addTourists.findOne(query)
       res.send(result)
     })
@@ -58,6 +58,36 @@ async function run() {
       res.send(result)
 
     })
+
+
+    app.put('/tourists/:id', async (req, res) => {
+      const id = req.params.id
+      const filter = { _id: new ObjectId(id) }
+      const optional = { upsert: true }
+      const updateSport = req.body
+      // console.log(updateSport);
+      const update = {
+        $set: {
+          photo: updateSport.photo,
+          name: updateSport.name,
+          country_Name: updateSport.country_Name,
+          location: updateSport.location,
+          short_description: updateSport.short_description,
+          average_cost: updateSport.average_cost,
+          seasonality: updateSport.seasonality,
+          travel_time: updateSport.travel_time,
+          totaVisitorsPerYear: updateSport.totaVisitorsPerYear,
+          user_name: updateSport.user_name,
+          User_Email: updateSport.User_Email
+        }
+      }
+      const result = await addTourists.updateOne(filter, update, optional)
+      res.send(result)
+
+
+    })
+
+
 
     app.delete('/tourists/:id', async (req, res) => {
       const id = req.params.id;
